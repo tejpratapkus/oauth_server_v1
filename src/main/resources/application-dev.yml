@@ -1,0 +1,41 @@
+server:
+  port: 64200
+  forward-headers-strategy: framework
+
+spring:
+  application:
+    name: oauth_server
+  security:
+    oauth2:
+      authorizationserver:
+        client:
+          localhost:
+            registration:
+              client-id: localhost
+              client-name: localhost
+              client-secret: { noop }localhost
+              authorization-grant-types: client_credentials
+              client-authentication-methods: client_secret_post,client_secret_basic
+
+            # opaque token, if not provided then JWT.
+            token:
+              access-token-format: reference
+              access-token-time-to-live: 240s
+
+          second:
+            registration:
+              client-id: second
+              client-name: second
+              client-secret: { noop }second
+              authorization-grant-types: client_credentials
+              client-authentication-methods: client_secret_post,client_secret_basic
+
+            # opaque token, if not provided then JWT.
+            token:
+              access-token-format: reference
+              access-token-time-to-live: 3600s
+
+logging:
+  level:
+    org:
+      springframework: DEBUG
